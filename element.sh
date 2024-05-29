@@ -5,7 +5,7 @@ PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
 SYMBOL=$1
 
 #if no input
-if [[ -z S1 ]]
+if [[ -z $1 ]]
 then 
   echo "Please provide an element as an argument."
 else
@@ -38,4 +38,5 @@ else
     echo "atomic_number"
 
   fi
-exit 0
+fi
+exit 
