@@ -38,11 +38,29 @@ else
       fi 
     else
       # get data by atomic_name (1 or 2 letters)
-      echo "atomic_name"
+       DATA=$($PSQL "SELECT e.atomic_number, e.symbol, e.name, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e INNER JOIN properties p ON e.atomic_number = p.atomic_number INNER JOIN types t ON p.type_id = t.type_id WHERE e.symbol = '$SYMBOL'")
+      
+      
+      if [[ -z $DATA ]]
+      then
+        echo "I could not find that element in the database."
+      else
+        # display data
+        DISPLAY
+      fi 
     fi
   else
     # get data by atomic_number
-    echo "atomic_number"
+     DATA=$($PSQL "SELECT e.atomic_number, e.symbol, e.name, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius FROM elements e INNER JOIN properties p ON e.atomic_number = p.atomic_number INNER JOIN types t ON p.type_id = t.type_id WHERE e.atomic_number = '$SYMBOL'")
+      
+      
+      if [[ -z $DATA ]]
+      then
+        echo "I could not find that element in the database."
+      else
+        # display data
+        DISPLAY
+      fi 
 
   fi
 fi
